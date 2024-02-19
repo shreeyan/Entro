@@ -1,0 +1,222 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title> Entro | Home</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/MAin.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/sb-admin.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/account.css">
+
+    <!-- Morris Charts CSS -->
+    <link href="css/plugins/morris.css" rel="stylesheet">
+	 <link href="css/sstyles.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <script type="text/javascript">
+    function changePassword()
+    {
+    	
+    	var xmlhttp;
+        if (window.XMLHttpRequest)
+        {// code for IE7+, Firefox, Chrome, Opera, Safari
+        	xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {
+        	// code for IE6, IE5
+        	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function()
+        {
+        	if(xmlhttp.readyState==4 && xmlhttp.status==200)
+        	{
+        		var jsonData = JSON.parse(xmlhttp.responseText);
+            	if(jsonData.result==='success' && jsonData.status==='updated')
+            	{	
+            		document.getElementById("message").innerHTML="password Updated Successfully...........";
+            		document.getElementById("message").style.background="green";
+            	}
+            	else
+            	{	
+            		document.getElementById("message").innerHTML=jsonData.status;
+            		document.getElementById("message").style.background="red";
+            	}
+            	
+        	}
+        } 
+        
+        var confirmPassword=document.getElementById("confirmPassword").value;
+        var password=document.getElementById("password").value;
+        if(confirmPassword===password){
+    	    xmlhttp.open("POST","rest/UserService/changePassword",true);
+    	    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    	    xmlhttp.send("password="+password);
+        }
+        else{
+        	
+        	document.getElementById("message").innerHTML="Password Not Match";
+        	
+        }
+    }
+</script>
+<body>
+    <header>
+        <h1>Current Affairs</h1>
+    </header>
+	 <div id="wrapper">
+       <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            <strong>    <a class="navbar-brand" href="Home.jsp" style="color:#ffffff"> Entro </a></strong>
+            </div>
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-right top-nav">
+                <li><a href="UserHome.jsp" style="color:#ffffff" ><i class="fa fa-home"></i> Home <b class="caret"></b></a></li>
+                <li><a href="ListEntre.jsp" style="color:#ffffff"><i class="fa fa-list"></i> Entrepreneurs <b class="caret"></b></a></li>
+                <li><a href="ListCategory.jsp" style="color:#ffffff"><i class="fa fa-list"></i> Domains <b class="caret"></b></a></li>
+                <li><a href="ListProducts.jsp" style="color:#ffffff"><i class="fa fa-shopping-cart"></i> Startups <b class="caret"></b></a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:#ffffff"><i class="fa fa-gear"></i> Settings <b class="caret"></b></a>
+                    <ul class="dropdown-menu" style="width: 200px;">
+                
+                    	<li>
+                            <a href="#" style="color:#8B441E"><b>Welcome: </b><%=user.getName() %> </a>
+                        </li>
+                        <li>
+                            <a href="Profile.jsp" style="color:#8B441E"><i class="fa fa-fw fa-user"></i> Profile </a>
+                        </li>
+                        <li>
+                            <a href="ChangePassword.jsp" style="color:#8B441E"><i class="fa fa-fw fa-key"></i> Change Password</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="UserLogin.jsp" style="color:#8B441E"><i class="fa fa-fw fa-sign-out"></i> Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                <li>
+                <img src="homeassets/images/c5.png" alt="Product 1" width="200" height="150">
+                </li>
+                    <li class="">
+                        <a href="UserHome.jsp" style="color:#ffffff"><i class="fa fa-fw fa-home"></i> Home</a>
+                    </li>
+                    <li>
+                        <a href="ListEntre.jsp" style="color:#ffffff"><i class="fa fa-fw fa-list"></i>Entrepreneurs</a>
+                    </li>
+                    <li>
+                        <a href="CurrentAffair.html" style="color:#ffffff"><i class="fa fa-fw fa-shopping-cart"></i>Current Affairs</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+       
+    <section id="articles">
+        <!-- Articles will be dynamically added here by JavaScript -->
+    </section>
+ </div>
+    <script src="scripts.js"></script>
+</body>
+<script type="text/javascript">
+const articles = [
+{
+    title: "Cryptocurrency Prices Soar Amidst Regulatory Uncertainty",
+    content: "The prices of major cryptocurrencies like Bitcoin and Ethereum surged after regulatory uncertainty in some countries led to increased demand.",
+    url: "https://www.reuters.com/business/financial-regulatory/cryptocurrency-prices-soar-regulatory-uncertainty-2024-02-18"
+  },
+  {
+    title: "Facebook Announces Plans to Enter Metaverse",
+    content: "Facebook unveiled its plans to transition into the metaverse, a virtual reality space that could change the way people interact online.",
+    url: "https://techcrunch.com/2024/02/19/facebook-metaverse-2024"
+  },
+  {
+    title: "Central Banks Eyeing Digital Currencies",
+    content: "Central banks are exploring the possibility of issuing digital currencies, which could have significant implications for the global financial system.",
+    url: "https://www.cnbc.com/2024/02/20/central-banks-eyeing-digital-currencies-2024.html"
+  },
+  {
+    title: "Growth Opportunities in Renewable Energy Sector",
+    content: "The renewable energy sector is expected to see substantial growth as governments worldwide invest in clean energy initiatives.",
+    url: "https://www.forbes.com/renewable-energy-sector-growth-opportunities-2024"
+  },
+  {
+    title: "NFTs Gain Popularity in Art and Entertainment Industries",
+    content: "Non-fungible tokens (NFTs) are gaining traction in the art and entertainment industries, with artists and content creators leveraging blockchain technology for digital art and collectibles.",
+    url: "https://www.nbcnews.com/nfts-popularity-art-entertainment-industries-2024-02-21"
+  },
+  {
+    title: "Challenges and Opportunities in the AI and Machine Learning Market",
+    content: "The artificial intelligence (AI) and machine learning market are expected to grow rapidly, but challenges such as bias and ethics could impact its growth.",
+    url: "https://www.businessinsider.com/challenges-opportunities-ai-machine-learning-market-2024-02-22"
+  },
+  {
+    title: "Global Economic Recovery Prospects Amidst Rising Inflation",
+    content: "The global economy is on the path to recovery, but rising inflation could pose challenges for central banks and policymakers.",
+    url: "https://www.wsj.com/global-economic-recovery-prospects-rising-inflation-2024-02-23"
+  },
+  {
+    title: "Space Exploration and the Emergence of New Commercial Opportunities",
+    content: "Space exploration is experiencing a renaissance, with new commercial opportunities emerging in areas such as satellite technology and space tourism.",
+    url: "https://www.bloomberg.com/space-exploration-commercial-opportunities-2024-02-24"
+  }
+              ];
+
+              function displayArticles() {
+                  const articlesContainer = document.getElementById('articles');
+
+                  articles.forEach(article => {
+                      const articleElement = document.createElement('div');
+                      articleElement.className = 'article';
+
+                      const titleElement = document.createElement('h2');
+                      titleElement.textContent = article.title;
+
+                      const contentElement = document.createElement('p');
+                      contentElement.textContent = article.content;
+
+                      const linkElement = document.createElement('a');
+                      linkElement.textContent = 'Read more';
+                      linkElement.href = article.url;
+
+                      articleElement.appendChild(titleElement);
+                      articleElement.appendChild(contentElement);
+                      articleElement.appendChild(linkElement);
+
+                      articlesContainer.appendChild(articleElement);
+                  });
+              }
+
+              displayArticles();
+
+</script>
+</html>

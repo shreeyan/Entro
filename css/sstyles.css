@@ -1,0 +1,48 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #8a6d3b;
+    color: #fff;
+    padding: 20px;
+}
+
+header h1 {
+    font-size: 32px;
+    margin: 0;
+}
+
+#articles {
+    margin: 20px;
+}
+
+.article {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #fff;
+}
+
+.article h2 {
+    font-size: 24px;
+    margin-top: 0;
+}
+
+.article p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.article a {
+    color: #003566;
+    text-decoration: none;
+}
+
+.article a:hover {
+    text-decoration: underline;
+}
